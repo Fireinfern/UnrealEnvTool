@@ -17,22 +17,23 @@ impl Register {
         let mut config_versions: CollectionOfVersions = CollectionOfVersions {
             versions: Vec::new(),
         };
+        let unreal_version: UnrealVersion = UnrealVersion {
+            version: String::from(&self.version),
+            path: String::from(&self.path_to_bin),
+        };
         let mut has_changed = false;
         if config_result.is_ok() {
             config_versions = serde_yaml::from_reader(config_result.ok().unwrap())?;
 
-            let _ = &config_versions.versions.iter_mut().map(|version| {
+            for version in config_versions.versions.iter_mut() {
                 if version.version == self.version {
-                    version.path = String::from(&self.path_to_bin);
+                    *version = unreal_version.clone();
                     has_changed = true;
+                    break;
                 }
-            });
+            }
         }
         if !has_changed {
-            let unreal_version: UnrealVersion = UnrealVersion {
-                version: String::from(&self.version),
-                path: String::from(&self.path_to_bin),
-            };
             config_versions.versions.push(unreal_version);
         }
         let config_string = serde_yaml::to_string(&config_versions)?;
