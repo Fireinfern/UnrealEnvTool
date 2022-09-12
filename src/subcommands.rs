@@ -5,6 +5,7 @@ use self::{register_version::Register, change_env_version::ChangeEnv, get_list::
 mod register_version;
 mod change_env_version;
 mod get_list;
+mod unreal_structs;
 
 #[derive(Subcommand, Debug)]
 pub enum Commands{
