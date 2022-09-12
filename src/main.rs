@@ -14,7 +14,7 @@ struct Cli {
 fn main() {
     let args = Cli::parse();
     match args.commands {
-        Commands::ChangeEnv(change_env) => {
+        Commands::ChangeEnv(_change_env) => {
             println!("Change");
         },
         Commands::Register(register) => {
@@ -24,7 +24,7 @@ fn main() {
                 println!("Registration had an error");
             }
         },
-        Commands::ListOfVersions(versions) => {
+        Commands::ListOfVersions(_versions) => {
             println!("versions")
         },
     }
