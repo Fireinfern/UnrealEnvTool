@@ -8,5 +8,6 @@ author = "Sebastian Silva"
 
 [dependencies]
 clap = { version = "3.2.20", features = ["derive"] }
+cli-table = "0.4.7"
 serde = { version = "1.0.144", features = ["derive"] }
 serde_yaml = "0.9.11"

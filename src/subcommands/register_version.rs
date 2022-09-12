@@ -13,7 +13,7 @@ pub struct Register {
 impl Register {
     pub fn register_version(&self) -> Result<(), Box<dyn std::error::Error>> {
         let config_path = get_config_path()?;
-        let config_result = std::fs::File::open(config_path);
+        let config_result = std::fs::File::open(String::from(&config_path));
         let mut config_versions: CollectionOfVersions = CollectionOfVersions {
             versions: Vec::new(),
         };
@@ -36,7 +36,7 @@ impl Register {
             config_versions.versions.push(unreal_version);
         }
         let config_string = serde_yaml::to_string(&config_versions)?;
-        std::fs::write("config.yaml", config_string)?;
+        std::fs::write(String::from(&config_path), config_string)?;
         Ok(())
     }
 }

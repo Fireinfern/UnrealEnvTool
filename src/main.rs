@@ -24,8 +24,11 @@ fn main() {
                 println!("Registration had an error");
             }
         },
-        Commands::ListOfVersions(_versions) => {
-            println!("versions")
+        Commands::ListOfVersions(versions) => {
+            let versions_result = versions.get_list();
+            if versions_result.is_err() {
+                println!("Error at getting list");
+            }
         },
     }
 }
