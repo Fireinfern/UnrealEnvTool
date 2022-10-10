@@ -14,8 +14,11 @@ struct Cli {
 fn main() {
     let args = Cli::parse();
     match args.commands {
-        Commands::ChangeEnv(_change_env) => {
-            println!("Change");
+        Commands::ChangeEnv(change_env) => {
+            let changed_version = change_env.change_version();
+            if changed_version.is_err() {
+                println!("Error in changed env");
+            }
         },
         Commands::Register(register) => {
             println!("register");
